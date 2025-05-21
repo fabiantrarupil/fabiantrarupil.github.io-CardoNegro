@@ -1,0 +1,131 @@
+:root {
+  --turquesa: #3FE0C2;
+  --morado: #8B4FA6;
+  --negro: #000000;
+  --madera: #D6A16D;
+  --beige: #F5D6B4;
+  --blanco: #FFFFFF;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--negro);
+  color: var(--turquesa);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: var(--turquesa);
+  color: var(--blanco);
+  padding: 1.5rem 0;
+  text-align: center;
+  position: relative;
+  background-image: linear-gradient(rgba(63, 224, 194, 0.7), rgba(139, 79, 166, 0.7)), url('img/Cardo Negro_1.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+header h1, header nav {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 0 2px #fff;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: var(--blanco);
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--blanco);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: var(--morado);
+}
+
+main {
+  flex: 1 0 auto;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--negro);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+section h2 {
+  color: var(--turquesa);
+  margin-top: 0;
+}
+
+footer {
+  flex-shrink: 0;
+  background: var(--turquesa);
+  color: var(--negro);
+  text-align: center;
+  padding: 1.5rem 0 1rem 0;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
+}
+
+/* Responsividad */
+@media (max-width: 700px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  main {
+    margin: 1rem 0;
+    padding: 0 0.5rem;
+  }
+  section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  header h1 {
+    font-size: 1.1rem;
+  }
+  section h2 {
+    font-size: 1rem;
+  }
+  nav a {
+    font-size: 1rem;
+  }
+} 
