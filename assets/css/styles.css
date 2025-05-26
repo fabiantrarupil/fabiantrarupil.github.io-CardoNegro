@@ -22,6 +22,7 @@
 
 html {
     scroll-behavior: smooth; /* Scroll suave para anclas */
+    overflow-x: hidden; /* **IMPORTANTE:** Evitar el scroll horizontal general */
 }
 
 body {
@@ -31,16 +32,22 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    overflow-x: hidden; /* **IMPORTANTE:** Evitar el scroll horizontal en el body también */
+}
+
+/* **ADICIÓN CLAVE:** Asegurar que el padding y el border no causen desbordamientos */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 /* =========================
    UTILIDADES / CLASES REUSABLES
    ========================= */
 .container {
-    width: 100%;
+    width: 100%; /* Asegurarse de que el ancho sea 100% y no fijo */
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem; /* Relleno lateral para el contenido */
+    padding: 0 1rem; /* Reducir padding lateral para móvil por defecto, se ajusta con media queries */
 }
 
 /* Estilos base para todas las secciones */
@@ -102,11 +109,11 @@ header {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem; /* Ajustado a 1rem para pantallas más pequeñas */
 }
 
 .logo-header {
-    width: 250px; /* **LOGO MÁS GRANDE** Aumentado a 250px */
+    width: 200px; /* Reducido un poco para tabletas/móviles, se ajustará más en media queries */
     height: auto;
     display: block;
     transition: transform 0.3s ease;
@@ -352,13 +359,15 @@ nav#main-nav a:focus::after {
     gap: 3rem; /* Más espacio entre imagen y texto */
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem; /* Asegurado para móvil */
     flex-wrap: wrap; /* Permitir que se envuelvan en móvil */
+    justify-content: center; /* Centrar items cuando se envuelvan */
 }
 
 .quienes-somos .qs-img {
     flex: 1; /* Permite que la imagen crezca */
-    min-width: 300px; /* Ancho mínimo para la imagen */
+    min-width: 280px; /* **AJUSTE:** Reducir min-width para móviles */
+    max-width: 100%; /* Asegurar que no se desborde */
     text-align: center; /* Centrar la imagen */
 }
 
@@ -372,7 +381,8 @@ nav#main-nav a:focus::after {
 
 .qs-text {
     flex: 2; /* Permite que el texto ocupe más espacio */
-    min-width: 300px; /* Ancho mínimo para el texto */
+    min-width: 280px; /* **AJUSTE:** Reducir min-width para móviles */
+    max-width: 100%; /* Asegurar que no se desborde */
     text-align: center; /*Texto centrado*/
 }
 
@@ -420,6 +430,7 @@ nav#main-nav a:focus::after {
     max-width: 800px;
     margin: 2rem auto;
     padding-left: 50px; /* Espacio para la línea de tiempo */
+    padding-right: 1rem; /* **ADICIÓN:** Evitar desbordamiento en móviles */
 }
 
 .historia-timeline::before {
@@ -525,7 +536,7 @@ nav#main-nav a:focus::after {
 .accordion-gallery {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem; /* Ajustado para móvil */
 }
 
 .accordion-panel {
@@ -612,7 +623,7 @@ nav#main-nav a:focus::after {
 }
 .formatos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* **AJUSTE:** Reducir minmax */
     gap: 2.5rem; /* Más espacio entre tarjetas */
     margin-top: 2rem;
 }
@@ -679,7 +690,7 @@ nav#main-nav a:focus::after {
 }
 .links-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Más grande */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* **AJUSTE:** Reducir minmax */
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -744,7 +755,7 @@ nav#main-nav a:focus::after {
 }
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* **AJUSTE:** Reducir minmax */
     gap: 3rem;
     max-width: 900px;
     margin: 0 auto;
@@ -886,8 +897,6 @@ footer {
     justify-content: center;
     gap: 1.5rem;
     margin-top: 1rem;
-    /* Ocultar en desktop si ya están en contacto */
-    /* @media (min-width: 769px) { display: none; } */
 }
 .footer-social-bottom a {
     color: var(--morado); /* Color para iconos en footer */
@@ -901,71 +910,119 @@ footer {
 
 
 /* =========================
-   RESPONSIVIDAD (Ajustes para Mobile First y Media Queries)
+   RESPONSIVIDAD (Media Queries combinadas con tu estructura)
    ========================= */
-/* Desktop First: Estilos base para pantallas grandes, luego se ajusta */
-@media (max-width: 900px) {
+
+/* Mobile First: Estilos por defecto para pantallas pequeñas, luego se ajusta */
+
+/* Estilos para móviles muy pequeños (hasta 480px, por ejemplo) */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0 0.5rem; /* Reducir aún más el padding para pantallas muy estrechas */
+    }
+
     .header-container {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0 1rem;
+        padding: 0 0.5rem;
     }
-    nav#main-nav ul {
-        gap: 1.5rem; /* Reducir gap en tablet */
+
+    .logo-header {
+        width: 100px; /* Reducir aún más el logo */
     }
+
     .hero-content h1 {
-        font-size: 2.8rem;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
     }
     .hero-content p {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
+    .btn-hero {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
     section h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
-    .quienes-somos .container {
-        flex-direction: column;
-        align-items: center; /* Centrar items */
-        gap: 2rem;
+    .subtitle-highlight {
+        font-size: 1rem;
     }
-    .qs-text {
-        text-align: center; /* Centrar texto también */
+
+    .quienes-somos .qs-img img {
+        max-width: 95%; /* Asegurar que la imagen no toque los bordes */
     }
-    .qs-text ul {
-        text-align: left; /* Mantener la lista justificada */
-        padding-left: 0; /* Ajustar padding si es necesario */
+    .qs-text p, .qs-text .intro-paragraph, .qs-text .quote-text {
+        font-size: 1rem;
     }
-    .accordion-header {
-        font-size: 1.2rem;
-        padding: 1rem 1.5rem;
-    }
-    .accordion-content.open {
-        padding: 1.5rem;
-    }
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-    }
-    .formato-item {
-        padding: 1.5rem;
-    }
-    .links-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-    }
-    .link-item img {
-        height: 120px;
-    }
-    .link-item .link-info {
+
+    .timeline-item .timeline-content {
         padding: 1rem;
     }
-    .contact-grid {
-        grid-template-columns: 1fr; /* Columna única en tablet */
-        gap: 2rem;
+    .timeline-item h3 {
+        font-size: 1.4rem;
+    }
+    .timeline-item p, .list-checkmarks li {
+        font-size: 0.9rem;
+    }
+
+    .accordion-header {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+    }
+    .accordion-content.open {
+        padding: 0.8rem;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Más pequeñas en móviles muy pequeños */
+        gap: 0.5rem;
+    }
+    .gallery-grid img {
+        height: 120px; /* Reducir altura para pantallas muy pequeñas */
+    }
+
+    .formato-item {
+        padding: 1rem;
+    }
+    .formato-item h3 {
+        font-size: 1.5rem;
+    }
+    .formato-item p, .format-details li {
+        font-size: 0.9rem;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr; /* Una sola columna para enlaces en móviles muy pequeños */
+    }
+    .link-item img {
+        height: 100px;
+    }
+    .link-item .link-info {
+        padding: 0.8rem;
+    }
+    .link-item .link-info h3 {
+        font-size: 1.2rem;
+    }
+    .link-item .link-info p {
+        font-size: 0.85rem;
+    }
+
+    .contact-form, .contact-details {
+        padding: 1.2rem;
+    }
+    .contact-form button {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.5rem;
+    }
+    .contact-info p, .social-links a {
+        font-size: 0.95rem;
+    }
+    .contact-social h3 {
+        font-size: 1.2rem;
     }
 }
 
-/* Teléfonos móviles */
-@media (max-width: 768px) {
+/* Pantallas Pequeñas (Móviles hasta 767px) - Tu media query @media (max-width: 768px) se convierte en esta */
+@media screen and (max-width: 767px) {
     /* Mostrar botón de hamburguesa y ocultar menú */
     nav#main-nav ul {
         display: none; /* Oculto por defecto en móviles */
@@ -975,7 +1032,7 @@ footer {
         position: absolute;
         top: 100%; /* Justo debajo del header */
         left: 0;
-        width: 100vw;
+        width: 100vw; /* Asegurar que ocupe todo el ancho del viewport */
         padding: 1.5rem 0;
         z-index: 300;
         box-shadow: 0 4px 24px rgba(0,0,0,0.5); /* Sombra para destacarlo */
@@ -988,59 +1045,232 @@ footer {
     .hamburger {
         display: flex; /* Mostrar el ícono de hamburguesa */
     }
+
+    .header-container {
+        flex-direction: row; /* Mantener en fila, pero ocultar el nav */
+        justify-content: space-between; /* Espacio entre logo y hamburguesa */
+        align-items: center;
+        padding: 0 1rem;
+    }
+
     .logo-header {
-        width: 120px; /* Reducir el tamaño del logo en móvil */
+        width: 150px; /* Ajustar el tamaño del logo en móvil */
     }
     .hero {
-        min-height: 50vh; /* Menos altura en móvil */
+        min-height: 60vh; /* Menos altura en móvil */
     }
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     .hero-content p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
     .btn-hero {
-        padding: 0.7rem 1.8rem;
-        font-size: 1rem;
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
     }
     section {
-        padding: 2rem 0;
+        padding: 2.5rem 0;
         margin: 1.5rem auto;
     }
     section h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
+
+    .quienes-somos .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .qs-text {
+        text-align: center;
+    }
+
+    .historia-timeline {
+        padding-left: 30px; /* Reducir el padding de la línea de tiempo */
+    }
+    .timeline-item::before {
+        left: -20px; /* Ajustar posición del punto de la línea de tiempo */
+    }
+    .timeline-item {
+        padding-left: 20px;
+    }
+
     .accordion-header {
-        font-size: 1.1rem;
-        padding: 1rem 1.5rem;
+        font-size: 1.3rem;
+        padding: 1.2rem 1.8rem;
     }
     .accordion-content.open {
-        padding: 1rem;
+        padding: 1.5rem;
     }
     .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Más pequeñas en móvil */
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ajuste para que quepan más en una fila */
+        gap: 0.8rem;
     }
     .gallery-grid img {
-        height: 200px;
+        height: 150px; /* Mantener una altura razonable */
     }
+
     .formato-item {
-        padding: 1.2rem;
-    }
-    .contact-form {
         padding: 1.5rem;
+    }
+    .links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste para 1 o 2 columnas */
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr; /* Columna única para el formulario de contacto */
+        gap: 2rem;
+    }
+    .contact-form, .contact-details {
+        padding: 2rem;
     }
     .contact-form button {
-        font-size: 1rem;
-        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        padding: 0.9rem 2.2rem;
     }
-    .contact-details {
-        padding: 1.5rem;
+}
+
+/* Pantallas Medianas (Tablet: 768px a 991px) - Tu media query @media screen and (min-width: 769px) and (max-width: 992px) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .container {
+        padding: 0 1.5rem; /* Aumentar el padding lateral */
     }
-    .contact-info p, .social-links a {
-        font-size: 1rem;
+    .header-container {
+        padding: 0 1.5rem;
     }
-    .contact-social h3 {
+    .logo-header {
+        width: 200px;
+    }
+
+    nav#main-nav ul {
+        display: flex; /* Asegurarse de que el menú completo se muestre */
+    }
+    .hamburger {
+        display: none; /* Ocultar hamburguesa */
+    }
+
+    .hero-content h1 {
+        font-size: 3.2rem;
+    }
+    .hero-content p {
+        font-size: 1.5rem;
+    }
+
+    section h2 {
+        font-size: 2.2rem;
+    }
+
+    .quienes-somos .container {
+        flex-direction: row; /* Volver a layout de fila */
+        justify-content: space-between;
+        align-items: flex-start; /* Alineación por defecto */
+        gap: 2.5rem;
+    }
+    .qs-text {
+        text-align: left; /* Volver a alinear a la izquierda */
+    }
+
+    .historia-timeline {
+        padding-left: 50px; /* Volver al padding original */
+    }
+    .timeline-item::before {
+        left: -39px; /* Volver al punto original */
+    }
+    .timeline-item {
+        padding-left: 30px;
+    }
+
+    .accordion-header {
         font-size: 1.4rem;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    .gallery-grid img {
+        height: 180px;
+    }
+
+    .formatos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .contact-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Volver a dos columnas */
+    }
+}
+
+/* Pantallas Grandes (Escritorio: 992px y más) */
+@media screen and (min-width: 992px) {
+    .container {
+        padding: 0 2rem; /* Aumentar el padding lateral */
+    }
+    .header-container {
+        padding: 0 2rem;
+    }
+    .logo-header {
+        width: 250px;
+    }
+
+    nav#main-nav ul {
+        display: flex; /* Asegurarse de que el menú completo se muestre */
+    }
+    .hamburger {
+        display: none; /* Ocultar hamburguesa */
+    }
+
+    .hero-content h1 {
+        font-size: 4rem;
+    }
+    .hero-content p {
+        font-size: 1.8rem;
+    }
+
+    section h2 {
+        font-size: 2.5rem;
+    }
+
+    .quienes-somos .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 3rem;
+    }
+    .qs-text {
+        text-align: left;
+    }
+
+    .historia-timeline {
+        padding-left: 50px;
+    }
+    .timeline-item::before {
+        left: -39px;
+    }
+    .timeline-item {
+        padding-left: 30px;
+    }
+
+    .accordion-header {
+        font-size: 1.4rem;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+    }
+    .gallery-grid img {
+        height: 180px;
+    }
+
+    .formatos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .contact-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
