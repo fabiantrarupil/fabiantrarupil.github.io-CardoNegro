@@ -1,34 +1,41 @@
-// =========================================================================
-// SCRIPT.JS PARA COMPARSA CARDO NEGRO
-// Este archivo contiene toda la lógica JavaScript para la página web.
-// =========================================================================
+/* =========================================================================
+   SCRIPT.JS PARA COMPARSA CARDO NEGRO
+   Este archivo contiene toda la lógica JavaScript para la página web.
+   Incluye funcionalidades para:
+   - Menú hamburguesa responsivo
+   - Acordeón de galería
+   - Carrusel de imágenes en la sección hero
+   ========================================================================= */
 
-// =========================================================================
-// MENÚ HAMBURGUESA
-// Controla la apertura y cierre del menú de navegación en pantallas pequeñas.
-// =========================================================================
+/* =========================================================================
+   MENÚ HAMBURGUESA
+   Controla la apertura y cierre del menú de navegación en pantallas pequeñas.
+   Implementa un menú desplegable que se activa en dispositivos móviles.
+   ========================================================================= */
 
-// Obtiene referencias a los elementos del DOM.
-const hamburgerBtn = document.getElementById('hamburger-btn');
-const navUl = document.querySelector('nav#main-nav ul');
-const navLinks = document.querySelectorAll('nav#main-nav ul li a'); // Todos los enlaces del menú
+// Selección de elementos del DOM necesarios para el menú hamburguesa
+const hamburgerBtn = document.getElementById('hamburger-btn');  // Botón que activa el menú
+const navUl = document.querySelector('nav#main-nav ul');        // Lista de navegación
+const navLinks = document.querySelectorAll('nav#main-nav ul li a');  // Enlaces individuales
 
-// Se asegura de que el botón de hamburguesa y el menú existan antes de añadir event listeners.
+// Verificación de existencia de elementos antes de agregar funcionalidad
 if (hamburgerBtn && navUl) {
-    // Event listener para el clic en el botón de hamburguesa.
+    // Event listener para el clic en el botón hamburguesa
     hamburgerBtn.addEventListener('click', () => {
-        // Alterna la clase 'open' en el menú (para mostrar/ocultar) y en el botón (para animación).
+        // Toggle de clases para mostrar/ocultar menú y animar el botón
         navUl.classList.toggle('open');
         hamburgerBtn.classList.toggle('open');
-        // También alterna 'aria-expanded' para accesibilidad.
+        
+        // Manejo de accesibilidad: actualiza el atributo aria-expanded
         const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true' || false;
         hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
     });
 
-    // Cierra el menú al hacer clic en un enlace de navegación (para mejorar la UX móvil).
+    // Cierre del menú al hacer clic en cualquier enlace
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (navUl.classList.contains('open')) { // Solo si el menú está abierto
+            // Solo cierra si el menú está abierto
+            if (navUl.classList.contains('open')) {
                 navUl.classList.remove('open');
                 hamburgerBtn.classList.remove('open');
                 hamburgerBtn.setAttribute('aria-expanded', 'false');
@@ -36,9 +43,9 @@ if (hamburgerBtn && navUl) {
         });
     });
 
-    // Cierra el menú al hacer clic fuera de él.
+    // Cierre del menú al hacer clic fuera de él
     document.addEventListener('click', (e) => {
-        // Si el clic no fue dentro del botón de hamburguesa ni dentro del menú de navegación.
+        // Verifica si el clic fue fuera del menú y del botón
         if (!hamburgerBtn.contains(e.target) && !navUl.contains(e.target)) {
             navUl.classList.remove('open');
             hamburgerBtn.classList.remove('open');
@@ -46,11 +53,9 @@ if (hamburgerBtn && navUl) {
         }
     });
 
-    // Opcional: Cierra el menú si se redimensiona la ventana y el ancho es mayor al breakpoint móvil.
-    // Esto previene que el menú quede "abierto" si el usuario cambia el tamaño de la ventana
-    // y el CSS de responsividad lo muestra en desktop.
+    // Manejo del redimensionamiento de ventana
     window.addEventListener('resize', () => {
-        // Asumiendo que el breakpoint para ocultar el menú de hamburguesa es 768px (o el que uses en CSS).
+        // Cierra el menú si la ventana es más ancha que el breakpoint móvil
         if (window.innerWidth > 768 && navUl.classList.contains('open')) {
             navUl.classList.remove('open');
             hamburgerBtn.classList.remove('open');
@@ -59,25 +64,26 @@ if (hamburgerBtn && navUl) {
     });
 }
 
+/* =========================================================================
+   ACORDEÓN DE GALERÍA
+   Implementa un acordeón para mostrar/ocultar secciones de la galería.
+   Permite que solo una sección esté abierta a la vez.
+   ========================================================================= */
 
-// =========================================================================
-// ACORDEÓN DE GALERÍA
-// Controla la funcionalidad de expansión/contracción de los paneles del acordeón.
-// =========================================================================
-
-// Obtiene todas las cabeceras de los paneles del acordeón.
+// Selección de todos los encabezados del acordeón
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-// Se asegura de que existan cabeceras de acordeón antes de añadir event listeners.
+// Verificación de existencia de elementos del acordeón
 if (accordionHeaders.length > 0) {
-    // Itera sobre cada cabecera para añadir un event listener de clic.
+    // Agrega funcionalidad a cada encabezado
     accordionHeaders.forEach(header => {
         header.addEventListener('click', function() {
+            // Referencias a elementos relacionados
             const clickedHeader = this;
             const clickedContent = this.nextElementSibling;
             const isOpening = !clickedHeader.classList.contains('active');
 
-            // Cierra todos los otros paneles del acordeón.
+            // Cierra todos los otros paneles
             accordionHeaders.forEach(otherHeader => {
                 if (otherHeader !== clickedHeader) {
                     otherHeader.classList.remove('active');
@@ -87,10 +93,11 @@ if (accordionHeaders.length > 0) {
                 }
             });
 
-            // Alterna el estado del panel clicado
+            // Toggle del panel actual
             clickedHeader.classList.toggle('active');
             clickedContent.classList.toggle('open');
 
+            // Ajusta la altura del contenido
             if (isOpening) {
                 clickedContent.style.maxHeight = clickedContent.scrollHeight + 'px';
             } else {
@@ -100,44 +107,65 @@ if (accordionHeaders.length > 0) {
     });
 }
 
+/* =========================================================================
+   CARRUSEL DE HÉROE (HERO CAROUSEL)
+   Implementa un carrusel de imágenes con navegación automática y manual.
+   Incluye controles de navegación y puntos indicadores.
+   ========================================================================= */
 
-// =========================================================================
-// CARRUSEL DE HÉROE (HERO CAROUSEL)
-// Controla la rotación automática y manual de imágenes en la Hero Section.
-// =========================================================================
+// Selección de elementos del carrusel
+const heroCarousel = document.getElementById('hero-carousel');          // Contenedor principal
+const carouselPrevBtn = document.getElementById('carousel-prev');       // Botón anterior
+const carouselNextBtn = document.getElementById('carousel-next');       // Botón siguiente
+const carouselDotsContainer = document.getElementById('carousel-dots'); // Contenedor de puntos
 
-const heroCarousel = document.getElementById('hero-carousel');
-const carouselPrevBtn = document.getElementById('carousel-prev');
-const carouselNextBtn = document.getElementById('carousel-next');
-const carouselDotsContainer = document.getElementById('carousel-dots');
-
-// Array de imágenes para el carrusel
+// Array de imágenes con metadatos
 const carouselImages = [
-    { src: 'assets/img/carousel/comparsa_cardo_negro_1.jpg', alt: 'Comparsa Cardo Negro en acción vibrante', caption: 'Cardo Negro: Ritmo que Vibra' },
-    { src: 'assets/img/carousel/comparsa_cardo_negro_2.jpg', alt: 'Danza y música en un carnaval', caption: 'La Pasión en Cada Movimiento' },
-    { src: 'assets/img/carousel/comparsa_cardo_negro_3.jpg', alt: 'Percusión afro en vivo', caption: 'Sonidos de Nuestra Herencia' }
+    { 
+        src: 'assets/img/carousel/comparsa_cardo_negro_1.jpg', 
+        alt: 'Comparsa Cardo Negro en acción vibrante', 
+        caption: 'Cardo Negro: Ritmo que Vibra' 
+    },
+    { 
+        src: 'assets/img/carousel/comparsa_cardo_negro_2.jpg', 
+        alt: 'Danza y música en un carnaval', 
+        caption: 'La Pasión en Cada Movimiento' 
+    },
+    { 
+        src: 'assets/img/carousel/comparsa_cardo_negro_3.jpg', 
+        alt: 'Percusión afro en vivo', 
+        caption: 'Sonidos de Nuestra Herencia' 
+    }
 ];
 
-let currentSlide = 0;
-let carouselInterval; // Variable para almacenar el ID del intervalo del carrusel
+// Variables de control del carrusel
+let currentSlide = 0;                    // Índice del slide actual
+let carouselInterval;                    // ID del intervalo para auto-avance
 
-// Función para renderizar el carrusel y los puntos de navegación
+/**
+ * Renderiza el carrusel y sus controles de navegación
+ * Crea los elementos del DOM necesarios y establece el estado inicial
+ */
 function renderCarousel() {
-    if (!heroCarousel || carouselImages.length === 0) return; // Salir si no hay carrusel o imágenes
+    // Verificación de elementos necesarios
+    if (!heroCarousel || carouselImages.length === 0) return;
 
-    heroCarousel.innerHTML = ''; // Limpiar carrusel existente
-    carouselDotsContainer.innerHTML = ''; // Limpiar puntos existentes
+    // Limpieza de contenido existente
+    heroCarousel.innerHTML = '';
+    carouselDotsContainer.innerHTML = '';
 
+    // Creación de elementos para cada imagen
     carouselImages.forEach((image, index) => {
+        // Creación del ítem del carrusel
         const item = document.createElement('div');
         item.classList.add('carousel-item');
         if (index === currentSlide) {
-            item.classList.add('active'); // Marcar el primer ítem como activo
+            item.classList.add('active');
         }
         item.innerHTML = `<img src="${image.src}" alt="${image.alt}">`;
         heroCarousel.appendChild(item);
 
-        // Crear punto de navegación
+        // Creación del punto de navegación
         const dot = document.createElement('div');
         dot.classList.add('carousel-dot');
         if (index === currentSlide) {
@@ -151,33 +179,40 @@ function renderCarousel() {
     });
 }
 
-// Llama a la función renderCarousel() para que se muestre el primer slide al cargar la página.
+// Inicialización del carrusel
 renderCarousel();
 
-// Configura los botones de navegación del carrusel
+// Configuración de botones de navegación
 if (carouselPrevBtn) {
     carouselPrevBtn.addEventListener('click', () => {
+        // Navegación al slide anterior
         currentSlide = (currentSlide === 0) ? carouselImages.length - 1 : currentSlide - 1;
         renderCarousel();
-        clearInterval(carouselInterval); // Detiene el auto-avance al navegar manualmente
-        carouselInterval = setInterval(nextSlide, 5000); // Reinicia el auto-avance
+        // Reinicio del auto-avance
+        clearInterval(carouselInterval);
+        carouselInterval = setInterval(nextSlide, 5000);
     });
 }
 
 if (carouselNextBtn) {
     carouselNextBtn.addEventListener('click', () => {
+        // Navegación al siguiente slide
         currentSlide = (currentSlide === carouselImages.length - 1) ? 0 : currentSlide + 1;
         renderCarousel();
-        clearInterval(carouselInterval); // Detiene el auto-avance al navegar manualmente
-        carouselInterval = setInterval(nextSlide, 5000); // Reinicia el auto-avance
+        // Reinicio del auto-avance
+        clearInterval(carouselInterval);
+        carouselInterval = setInterval(nextSlide, 5000);
     });
 }
 
-// Función para avanzar al siguiente slide automáticamente
+/**
+ * Avanza automáticamente al siguiente slide
+ * Se ejecuta cada 5 segundos si no hay interacción manual
+ */
 function nextSlide() {
     currentSlide = (currentSlide === carouselImages.length - 1) ? 0 : currentSlide + 1;
     renderCarousel();
 }
 
-// Inicia el avance automático del carrusel (cada 5 segundos)
+// Inicio del auto-avance del carrusel
 carouselInterval = setInterval(nextSlide, 5000);

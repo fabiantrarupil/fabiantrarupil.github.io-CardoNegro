@@ -1,254 +1,283 @@
-/* Archivo: Assets/styles.css
-   Tema: Oscuro, Vibrante y con Identidad para Comparsa Cardo Negro
-   Incluye paleta de colores, tipografía, estilos generales, header, hero section,
-   secciones de contenido, acordeón/galería, formulario de contacto, footer y responsividad.
-*/
+/* ==========================================
+   ARCHIVO: styles.css
+   DESCRIPCIÓN: Estilos principales para el sitio web de Comparsa Cardo Negro
+   TEMA: Diseño oscuro, vibrante y con identidad cultural
+   ========================================== */
 
-/* =========================
-   PALETA Y TIPOGRAFÍA BASE
-   ========================= */
+/* ==========================================
+   VARIABLES CSS Y PALETA DE COLORES
+   ========================================== */
 :root {
-    --turquesa: #3FE0C2; /* Color de acento 1 (Calipso brillante) */
-    --morado: #8B4FA6;   /* Color de acento 2 (Púrpura intenso) */
-    --negro: #000000;    /* Fondo principal */
-    --blanco: #FFFFFF;
-    --gris-oscuro-claro: #1f1f1f; /* Para fondos de secciones (un poco más claro que negro puro) */
-    --gris-medio: #333333; /* Para elementos de fondo (tarjetas, inputs) */
-    --gris-claro: #f5f5f5; /* Para elementos con fondo claro (ej. inputs, si aplicara) */
+    /* Variables de color para mantener consistencia y facilitar cambios */
+    --turquesa: #3FE0C2;    /* Color de acento principal - Inspirado en el mar Caribe */
+    --morado: #8B4FA6;      /* Color de acento secundario - Representa la riqueza cultural */
+    --negro: #000000;       /* Color de fondo principal - Base del diseño oscuro */
+    --blanco: #FFFFFF;      /* Color de texto principal - Para máximo contraste */
+    --gris-oscuro-claro: #1f1f1f;  /* Fondo de secciones - Ligeramente más claro que el negro */
+    --gris-medio: #333333;         /* Fondo de elementos - Para tarjetas y formularios */
+    --gris-claro: #f5f5f5;         /* Fondo de elementos claros - Para inputs y contrastes */
 }
 
-/* Importar fuentes de Google Fonts (ejemplos) */
+/* ==========================================
+   IMPORTACIÓN DE FUENTES
+   ========================================== */
+/* Importación de fuentes de Google Fonts para tipografía moderna y legible */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 
+/* ==========================================
+   ESTILOS BASE Y RESET
+   ========================================== */
+/* Configuración de scroll suave para navegación por anclas */
 html {
-    scroll-behavior: smooth; /* Scroll suave para anclas */
-    overflow-x: hidden; /* **IMPORTANTE:** Evitar el scroll horizontal general */
+    scroll-behavior: smooth;  /* Permite desplazamiento suave al hacer clic en enlaces internos */
+    overflow-x: hidden;      /* Previene scroll horizontal no deseado */
 }
 
+/* Estilos base del cuerpo del documento */
 body {
-    background: var(--negro);
-    color: var(--blanco); /* Color base del texto del cuerpo */
-    font-family: 'Open Sans', Arial, sans-serif; /* Fuente legible para el cuerpo */
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    overflow-x: hidden; /* **IMPORTANTE:** Evitar el scroll horizontal en el body también */
+    background: var(--negro);           /* Fondo negro para el tema oscuro */
+    color: var(--blanco);               /* Texto en blanco para contraste */
+    font-family: 'Open Sans', Arial, sans-serif;  /* Fuente principal con fallbacks */
+    margin: 0;                          /* Elimina márgenes predeterminados */
+    padding: 0;                         /* Elimina padding predeterminado */
+    line-height: 1.6;                   /* Espaciado entre líneas para mejor legibilidad */
+    overflow-x: hidden;                 /* Previene scroll horizontal */
 }
 
-/* **ADICIÓN CLAVE:** Asegurar que el padding y el border no causen desbordamientos */
+/* Reset de box-sizing para todos los elementos */
 *, *::before, *::after {
-    box-sizing: border-box;
+    box-sizing: border-box;  /* Incluye padding y border en el ancho/alto total */
 }
 
-/* =========================
-   UTILIDADES / CLASES REUSABLES
-   ========================= */
+/* ==========================================
+   CLASES DE UTILIDAD Y CONTENEDORES
+   ========================================== */
+/* Contenedor principal para centrar contenido */
 .container {
-    width: 100%; /* Asegurarse de que el ancho sea 100% y no fijo */
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1rem; /* Reducir padding lateral para móvil por defecto, se ajusta con media queries */
+    width: 100%;              /* Ancho completo */
+    max-width: 1100px;        /* Ancho máximo para pantallas grandes */
+    margin: 0 auto;           /* Centrado horizontal */
+    padding: 0 1rem;          /* Padding lateral responsivo */
 }
 
 /* Estilos base para todas las secciones */
 section {
-    margin-bottom: 4rem; /* Espacio entre secciones */
-    padding: 3rem 0; /* Relleno vertical para secciones */
-    background: var(--gris-oscuro-claro); /* Fondo sutil para secciones */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    border-radius: 12px;
-    margin: 2rem auto; /* Centrar secciones con margen */
+    margin-bottom: 4rem;      /* Espacio entre secciones */
+    padding: 3rem 0;          /* Padding vertical */
+    background: var(--gris-oscuro-claro);  /* Fondo sutil */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);  /* Sombra suave */
+    border-radius: 12px;      /* Esquinas redondeadas */
+    margin: 2rem auto;        /* Centrado con margen */
 }
 
+/* Ajuste especial para la primera sección (hero) */
 section:first-of-type {
-    margin-top: 0; /* Eliminar margen superior de la primera sección si es necesario */
-    border-radius: 0; /* Hero section sin borde redondeado superior */
+    margin-top: 0;            /* Elimina margen superior */
+    border-radius: 0;         /* Elimina bordes redondeados en la parte superior */
 }
 
-/* Estilos para todos los títulos H2 de sección */
+/* Estilos para títulos de sección */
 section h2 {
-    font-family: 'Montserrat', Arial, sans-serif;
-    color: var(--morado); /* Título principal de sección en morado */
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', Arial, sans-serif;  /* Fuente para títulos */
+    color: var(--morado);     /* Color distintivo */
+    font-size: 2.5rem;        /* Tamaño grande para jerarquía */
+    margin-bottom: 2rem;      /* Espacio después del título */
+    text-align: center;       /* Centrado */
+    text-transform: uppercase;  /* Texto en mayúsculas */
+    letter-spacing: 1.5px;    /* Espaciado entre letras */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);  /* Sombra de texto */
 }
 
-/* Subtítulo resaltado para los H2 de sección */
+/* Estilo para subtítulos resaltados */
 .subtitle-highlight {
-    display: block;
-    font-size: 1.2rem;
-    color: var(--turquesa);
-    text-transform: none;
-    letter-spacing: 0;
-    margin-top: 0.5rem;
-    font-weight: 400;
+    display: block;           /* Ocupa línea completa */
+    font-size: 1.2rem;        /* Tamaño más pequeño que el título */
+    color: var(--turquesa);   /* Color de acento */
+    text-transform: none;     /* Sin transformación de texto */
+    letter-spacing: 0;        /* Espaciado normal */
+    margin-top: 0.5rem;       /* Espacio después del título */
+    font-weight: 400;         /* Peso normal */
 }
 
-
-/* =========================
+/* ==========================================
    HEADER Y NAVEGACIÓN
-   ========================= */
+   ========================================== */
+/* Estilos del encabezado */
 header {
-    background: var(--negro); /* Fondo oscuro para el header */
-    color: var(--blanco);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border-bottom: 2px solid var(--morado); /* Borde inferior que combina con la paleta */
+    background: var(--negro);  /* Fondo negro */
+    color: var(--blanco);      /* Texto blanco */
+    padding: 1rem 0;           /* Padding vertical */
+    position: sticky;          /* Header fijo al hacer scroll */
+    top: 0;                    /* Pegado a la parte superior */
+    z-index: 1000;             /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);  /* Sombra para separación visual */
+    border-bottom: 2px solid var(--morado);  /* Borde inferior decorativo */
 }
 
+/* Contenedor del header */
 .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem; /* Ajustado a 1rem para pantallas más pequeñas */
+    display: flex;             /* Layout flexible */
+    align-items: center;       /* Centrado vertical */
+    justify-content: space-between;  /* Espacio entre elementos */
+    max-width: 1200px;         /* Ancho máximo */
+    margin: 0 auto;            /* Centrado */
+    padding: 0 1rem;           /* Padding lateral */
 }
 
+/* Estilos del logo */
 .logo-header {
-    width: 200px; /* Reducido un poco para tabletas/móviles, se ajustará más en media queries */
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease;
+    width: 200px;              /* Ancho fijo */
+    height: auto;              /* Altura proporcional */
+    display: block;            /* Comportamiento de bloque */
+    transition: transform 0.3s ease;  /* Transición suave para hover */
 }
+
+/* Efecto hover del logo */
 .logo-header:hover {
-    transform: scale(1.05); /* Efecto hover para el logo */
+    transform: scale(1.05);    /* Ligero aumento de tamaño */
 }
 
-/* Estilos de navegación */
+/* Navegación principal */
 nav#main-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex;             /* Layout flexible */
+    gap: 2rem;                 /* Espacio entre elementos */
+    list-style: none;          /* Sin viñetas */
+    margin: 0;                 /* Sin margen */
+    padding: 0;                /* Sin padding */
 }
 
+/* Enlaces de navegación */
 nav#main-nav a {
-    color: var(--blanco); /* Color inicial de los enlaces de navegación */
-    text-decoration: none;
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    transition: color 0.3s, text-shadow 0.3s;
-    position: relative;
-    padding-bottom: 0.5rem; /* Espacio para el subrayado */
+    color: var(--blanco);      /* Color inicial */
+    text-decoration: none;     /* Sin subrayado */
+    font-family: 'Montserrat', Arial, sans-serif;  /* Fuente para navegación */
+    font-weight: 700;          /* Negrita */
+    font-size: 1.1rem;         /* Tamaño de fuente */
+    letter-spacing: 1px;       /* Espaciado entre letras */
+    transition: color 0.3s, text-shadow 0.3s;  /* Transiciones suaves */
+    position: relative;        /* Para posicionamiento del subrayado */
+    padding-bottom: 0.5rem;    /* Espacio para el subrayado */
 }
 
+/* Subrayado animado para enlaces */
 nav#main-nav a::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 3px; /* Más grueso */
+    content: '';               /* Contenido vacío */
+    display: block;            /* Comportamiento de bloque */
+    width: 0;                  /* Ancho inicial 0 */
+    height: 3px;               /* Altura del subrayado */
     background: var(--morado); /* Color del subrayado */
-    transition: width 0.3s ease;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    transition: width 0.3s ease;  /* Transición suave */
+    position: absolute;        /* Posicionamiento absoluto */
+    left: 0;                   /* Alineado a la izquierda */
+    bottom: 0;                 /* Alineado al fondo */
 }
 
+/* Estados hover y focus de enlaces */
 nav#main-nav a:hover,
 nav#main-nav a:focus {
-    color: var(--turquesa); /* Cambio de color al hover */
-    text-shadow: 0 0 10px rgba(63,224,194,0.6); /* Sombra luminosa */
+    color: var(--turquesa);    /* Cambio de color */
+    text-shadow: 0 0 10px rgba(63,224,194,0.6);  /* Efecto de brillo */
 }
 
+/* Animación del subrayado en hover/focus */
 nav#main-nav a:hover::after,
 nav#main-nav a:focus::after {
-    width: 100%;
+    width: 100%;               /* Ancho completo */
 }
 
-/* Menú Hamburguesa (Icono) */
+/* ==========================================
+   MENÚ HAMBURGUESA (MÓVIL)
+   ========================================== */
+/* Botón hamburguesa */
 .hamburger {
-    display: none; /* Oculto por defecto en desktop */
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 200;
-    padding: 0;
+    display: none;             /* Oculto por defecto en desktop */
+    flex-direction: column;    /* Disposición vertical */
+    justify-content: space-between;  /* Espacio entre líneas */
+    width: 30px;               /* Ancho del botón */
+    height: 20px;              /* Altura del botón */
+    background: none;          /* Sin fondo */
+    border: none;              /* Sin borde */
+    cursor: pointer;           /* Cursor pointer */
+    z-index: 200;              /* Por encima de otros elementos */
+    padding: 0;                /* Sin padding */
 }
 
+/* Líneas del botón hamburguesa */
 .hamburger span {
-    width: 100%;
-    height: 3px;
-    background: var(--morado); /* Color de las líneas de la hamburguesa */
-    border-radius: 2px;
-    display: block;
-    transition: all 0.3s ease-in-out;
+    width: 100%;               /* Ancho completo */
+    height: 3px;               /* Altura de la línea */
+    background: var(--morado); /* Color de las líneas */
+    border-radius: 2px;        /* Esquinas redondeadas */
+    display: block;            /* Comportamiento de bloque */
+    transition: all 0.3s ease-in-out;  /* Transición suave */
 }
 
-/* Animación de la hamburguesa a "X" */
+/* Animación a "X" cuando está abierto */
 .hamburger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(5px, 5px);  /* Rotación y traslación */
 }
 .hamburger.open span:nth-child(2) {
-    opacity: 0;
+    opacity: 0;                /* Desaparición de la línea central */
 }
 .hamburger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: rotate(-45deg) translate(5px, -5px);  /* Rotación y traslación */
 }
 
-/* =========================
-   HERO SECTION (Carrusel de imágenes para impacto visual)
-   ========================= */
+/* ==========================================
+   SECCIÓN HERO (CARRUSEL)
+   ========================================== */
+/* Contenedor principal del hero */
 .hero {
-    position: relative;
-    min-height: 80vh; /* Más altura para más impacto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    background: var(--negro); /* Fondo para fallback */
+    position: relative;        /* Para posicionamiento absoluto de elementos hijos */
+    min-height: 80vh;         /* Altura mínima del viewport */
+    display: flex;             /* Layout flexible */
+    align-items: center;       /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    text-align: center;        /* Texto centrado */
+    overflow: hidden;          /* Oculta desbordamiento */
+    background: var(--negro);  /* Fondo de respaldo */
 }
 
+/* Contenedor del carrusel */
 .hero-carousel {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
+    position: absolute;        /* Posicionamiento absoluto */
+    top: 0; left: 0; right: 0; bottom: 0;  /* Ocupa todo el espacio */
+    width: 100%;              /* Ancho completo */
+    height: 100%;             /* Altura completa */
+    overflow: hidden;         /* Oculta desbordamiento */
+    z-index: 1;               /* Nivel de apilamiento */
 }
 
+/* Elementos individuales del carrusel */
 .carousel-item {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Oculto por defecto */
-    transition: opacity 1.5s ease-in-out; /* Transición suave entre imágenes */
+    position: absolute;        /* Posicionamiento absoluto */
+    top: 0; left: 0;          /* Posición inicial */
+    width: 100%;              /* Ancho completo */
+    height: 100%;             /* Altura completa */
+    opacity: 0;               /* Inicialmente oculto */
+    transition: opacity 1.5s ease-in-out;  /* Transición suave */
 }
 
+/* Estado activo del elemento del carrusel */
 .carousel-item.active {
-    opacity: 1; /* Mostrar el ítem activo */
+    opacity: 1;               /* Totalmente visible */
 }
 
+/* Imágenes del carrusel */
 .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cubre todo el espacio */
-    filter: brightness(0.7); /* Oscurece un poco la imagen */
+    width: 100%;              /* Ancho completo */
+    height: 100%;             /* Altura completa */
+    object-fit: cover;        /* Cubre todo el espacio */
+    filter: brightness(0.7);  /* Oscurece ligeramente */
 }
 
+/* Overlay oscuro sobre el carrusel */
 .hero::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.55); /* Capa más oscura para mejor contraste del texto */
-    z-index: 2;
+    content: '';              /* Contenido vacío */
+    position: absolute;       /* Posicionamiento absoluto */
+    top: 0; left: 0; right: 0; bottom: 0;  /* Ocupa todo el espacio */
+    background: rgba(0,0,0,0.55);  /* Fondo semi-transparente */
+    z-index: 2;               /* Nivel de apilamiento */
 }
 
 .hero-content {

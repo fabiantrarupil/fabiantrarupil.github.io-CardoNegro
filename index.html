@@ -1,26 +1,42 @@
+<!-- Declaración del tipo de documento HTML5 -->
 <!DOCTYPE html>
+<!-- Elemento raíz del documento HTML, especificando español como idioma principal -->
 <html lang="es">
 
+<!-- Sección de metadatos y recursos del documento -->
 <head>
+    <!-- Especifica la codificación de caracteres UTF-8 para soportar caracteres especiales -->
     <meta charset="UTF-8">
+    <!-- Configura la vista responsive para dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlace a la hoja de estilos principal del sitio -->
     <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Enlace a Font Awesome para iconos (versión 6.5.1) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Título de la página que aparece en la pestaña del navegador -->
     <title>Comparsa Cardo Negro</title>
 </head>
 
+<!-- Cuerpo principal del documento HTML -->
 <body>
+    <!-- Encabezado de la página con navegación principal -->
     <header>
+        <!-- Contenedor para organizar elementos del header -->
         <div class="header-container">
+            <!-- Logo de la comparsa con clase para estilizado -->
             <img src="assets/img/Logo Cardo Negro.jpg" alt="Logo Comparsa Cardo Negro" class="logo-header">
+            <!-- Título principal oculto para SEO y accesibilidad -->
             <h1 style="display:none;">Comparsa Cardo Negro: Ritmo y Tradición Afro</h1>
+            <!-- Botón de menú hamburguesa para dispositivos móviles -->
             <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú de navegación">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            <!-- Navegación principal con enlaces a secciones -->
             <nav id="main-nav">
                 <ul>
+                    <!-- Enlaces internos usando anclas (#) para navegación suave -->
                     <li><a href="#hero">Inicio</a></li>
                     <li><a href="#agrupacion">La Agrupación</a></li>
                     <li><a href="#historia-experiencia">Nuestra Historia</a></li>
@@ -33,23 +49,32 @@
         </div>
     </header>
 
+    <!-- Contenido principal del sitio -->
     <main>
+        <!-- Sección del carrusel hero con navegación -->
         <section id="hero" class="hero">
+            <!-- Contenedor del carrusel que se llenará dinámicamente con JavaScript -->
             <div class="hero-carousel" id="hero-carousel">
             </div>
+            <!-- Controles de navegación del carrusel -->
             <div class="carousel-nav">
                 <button class="prev" id="carousel-prev">❮</button>
                 <button class="next" id="carousel-next">❯</button>
             </div>
+            <!-- Indicadores de posición del carrusel -->
             <div class="carousel-dots" id="carousel-dots"></div>
         </section>
 
+        <!-- Sección "Quiénes Somos" con imagen y texto -->
         <section id="agrupacion" class="container quienes-somos">
+            <!-- Contenedor de imagen con clase para estilizado -->
             <div class="qs-img">
                 <img src="assets/img/img1.jpg" alt="Cardo Negro agrupación">
             </div>
+            <!-- Contenedor de texto con información de la agrupación -->
             <div class="qs-text">
                 <h2>La Agrupación <span class="subtitle-highlight">Nuestra Esencia</span></h2>
+                <!-- Párrafos descriptivos con clases para estilizado -->
                 <p class="intro-paragraph">
                     Cardo Negro es una agrupación de música y danza que nace el año 2018 y busca reflexionar de manera
                     crítica en torno a los roles de género (masculinidades danzantes y femineidades a cargo de la
@@ -63,14 +88,18 @@
                     el territorio nacional, la esclavitud en el Santiago colonial y la necesidad de visibilizar y
                     reivindicar las luchas del pueblo tribal afrodescendiente chileno.
                 </p>
+                <!-- Cita destacada con énfasis -->
                 <p class="quote-text"><em>"¡Si la calle retumba, es porque tumbe trae!"</em></p>
             </div>
         </section>
 
+        <!-- Sección de historia con línea de tiempo -->
         <section id="historia-experiencia" class="container historia-section">
-            <h2>Nuestra Trayectoria <span class="subtitle-highlight">Hitos y Conquistas</span></h2>
+            <h2>Nuestra Trayectoria <span class="subtitle-highlight">Hitos y Evolución</span></h2>
 
+            <!-- Contenedor de la línea de tiempo -->
             <div class="historia-timeline">
+                <!-- Elementos individuales de la línea de tiempo -->
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <h3>Inicios y Formación (2018)</h3>
@@ -122,17 +151,22 @@
             </div>
         </section>
 
+        <!-- Sección de galería con acordeón -->
         <section id="galeria" class="galeria">
             <div class="container accordion-gallery">
                 <h2>Nuestros Momentos en Imágenes <span class="subtitle-highlight">Un Viaje Visual</span></h2>
 
+                <!-- Panel de acordeón para presentaciones -->
                 <div class="accordion-panel">
+                    <!-- Encabezado del acordeón con icono de Font Awesome -->
                     <button class="accordion-header">
                         Presentaciones Destacadas 2024
                         <i class="fas fa-chevron-down accordion-icon"></i>
                     </button>
+                    <!-- Contenido del acordeón con grid de imágenes -->
                     <div class="accordion-content">
                         <div class="gallery-grid">
+                            <!-- Imágenes de la galería con alt text descriptivo -->
                             <img src="assets/img/gallery/1673837846127.jpg" alt="Comparsa en Presentación 1">
                             <img src="assets/img/gallery/1673837846112.jpg" alt="Comparsa en Presentación 2">
                             <img src="assets/img/gallery/1673837846120.jpg" alt="Comparsa en Presentación 3">
@@ -164,9 +198,12 @@
             </div>
         </section>
 
+        <!-- Sección de formatos de presentación -->
         <section id="formatos" class="container formatos-section">
             <h2>Nuestros Formatos <span class="subtitle-highlight">Experiencias a tu medida</span></h2>
+            <!-- Grid de formatos disponibles -->
             <div class="formatos-grid">
+                <!-- Elementos individuales de formato -->
                 <div class="formato-item">
                     <h3>Talleres de danza con música en vivo</h3>
                     <p class="intro-paragraph">
@@ -176,6 +213,7 @@
                         los roles de género instaurados socialmente. No se requiere de experiencia ni conocimientos
                         previos.
                     </p>
+                    <!-- Lista de detalles del formato -->
                     <ul class="format-details">
                         <li><strong>Equipo:</strong> Mínimo 4 personas</li>
                         <li><strong>Duración:</strong> 40 min a 1.5 horas aprox.</li>
@@ -212,10 +250,14 @@
             </div>
         </section>
 
+        <!-- Sección de enlaces de interés -->
         <section id="links" class="container links-section">
             <h2>Nuestra Huella Digital <span class="subtitle-highlight">Descubre Más</span></h2>
+            <!-- Grid de enlaces con imágenes -->
             <div class="links-grid">
+                <!-- Elementos de enlace individuales -->
                 <a href="https://ejemplo.com/actividad-gam" target="_blank" class="link-item">
+                    <!-- NOTA: URL de ejemplo que debe ser reemplazada -->
                     <img src="assets/img/links/gam_thumbnail.jpg" alt="Actividad GAM">
                     <div class="link-info">
                         <h3>Actividad mes de la danza GAM</h3>
@@ -253,12 +295,16 @@
             </div>
         </section>
 
+        <!-- Sección de contacto -->
         <section id="contacto" class="container contacto-section">
             <h2>¡Contáctanos! <span class="subtitle-highlight">Queremos Conocerte</span></h2>
             <p class="contact-intro">¿Interesado en nuestras presentaciones, talleres o en unirte a la comparsa?
                 ¡Déjanos un mensaje!</p>
+            <!-- Grid de contacto con formulario y detalles -->
             <div class="contact-grid">
+                <!-- Formulario de contacto -->
                 <form class="contact-form">
+                    <!-- Campos del formulario con labels asociados -->
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
 
@@ -273,48 +319,50 @@
 
                     <button type="submit">Enviar Mensaje</button>
                 </form>
+                <!-- Información de contacto y redes sociales -->
                 <div class="contact-details">
                     <div class="contact-info">
                         <h3>Información de Contacto</h3>
                         <p><i class="fas fa-envelope"></i> agrupacioncardonegro@gmail.com</p>
                         <p><i class="fas fa-phone"></i> +56937109871</p>
                     </div>
+                    <!-- Enlaces a redes sociales con iconos de Font Awesome -->
                     <div class="contact-social">
                         <h3>Síguenos en nuestras redes:</h3>
                         <div class="social-links">
+                            <!-- NOTA: Algunas URLs son placeholders que deben ser actualizadas -->
                             <a href="https://instagram.com/cardo.negro" target="_blank"
                                 aria-label="Instagram Cardo Negro"><i class="fab fa-instagram"></i></a>
                             <a href="https://instagram.com/comparsacardonegro" target="_blank"
                                 aria-label="Instagram Comparsa Cardo Negro"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.youtube.com/channel/TU_CANAL_YOUTUBE" target="_blank"
+                            <a href="https://www.youtube.com/channel/UCRMTUcghEy-R5IUn6DAka8g" target="_blank"
                                 aria-label="YouTube Cardo Negro"><i class="fab fa-youtube"></i></a>
-                            <a href="https://open.spotify.com/intl-es/artist/3KR2KvXSL7NuLq3mRUvtmP?si=KZYThrRiSWqisBh38nEf1Q"
+                            <a href="https://open.spotify.com/intl-es/artist/3KR2KvXSL7NuLq3mRUvtmP?si=QJsiPZs4SXewJ3gzc1fZYQ"
                                 target="_blank" aria-label="Spotify Cardo Negro"><i class="fab fa-spotify"></i></a>
-                            <a href="https://facebook.com/TU_FACEBOOK" target="_blank"
-                                aria-label="Facebook Cardo Negro"><i class="fab fa-facebook"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
+    <!-- Pie de página -->
     <footer>
         <div class="footer-content">
             <p>© 2025 Comparsa Cardo Negro. Todos los derechos reservados. FTWebDeveloper</p>
+            <!-- Enlaces sociales en el footer -->
             <div class="footer-social-bottom">
-                <a href="https://www.instagram.com/cardo.negro" target="_blank" title="Instagram"><i
+                <!-- NOTA: Algunas URLs son placeholders que deben ser actualizadas -->
+                <a href="https://www.instagram.com/ftwebdeveloper/" target="_blank" title="Instagram"><i
                         class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/TU_LINKEDIN" target="_blank" title="LinkedIn"><i
+                <a href="http://linkedin.com/in/fabian-marcelo-trarupil-fernandez/" target="_blank" title="LinkedIn"><i
                         class="fab fa-linkedin"></i></a>
-                <a href="https://wa.me/56937109871" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:agrupacioncardonegro@gmail.com" target="_blank" title="Gmail"><i
-                        class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/56926406253" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
 
+    <!-- Script principal al final del body para asegurar que el DOM esté cargado -->
     <script src="assets/js/script.js"></script>
 </body>
 
